@@ -26,6 +26,7 @@ module.exports = function(app, passport){
         var username = req.body.username;
         var password = req.body.password;
 
+
         resourceUtil.loginWithMobile(
             username,
             password
@@ -34,9 +35,9 @@ module.exports = function(app, passport){
                 success: true,
                 value: authObject
             })
-        }, function(){
+        }, function(error){
             res.status(400);
-            res.json({ success: false})
+            res.json({ success: false, error})
         })
     });
 

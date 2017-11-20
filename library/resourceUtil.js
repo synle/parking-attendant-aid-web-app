@@ -54,6 +54,10 @@ var resourceUtil = {
         where: { email: email, password: encryptedPassword, }
       }).then(
         function(foundUser){
+          if(!foundUser){
+            throw 'User not found...'
+          }
+
           // found user, then create token...
           var tokenObject = {
             userId  : foundUser.id,
@@ -73,7 +77,7 @@ var resourceUtil = {
           )
         },
         function(error){
-          reject();
+          reject(error);
         }
       );
     });

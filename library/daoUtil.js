@@ -56,7 +56,7 @@ const User = sequelize.define('parking_users', {
 const AccessToken = sequelize.define('parking_accesses', {
     id               : { type: Sequelize.DataTypes.UUID, defaultValue: Sequelize.DataTypes.UUIDV1, primaryKey: true },
     userId           : { type: Sequelize.DataTypes.UUID },
-    token            : { type: Sequelize.STRING },
+    token            : { type: Sequelize.TEXT },
     expired          : { type: Sequelize.BOOLEAN, defaultValue: false },
 });
 
@@ -65,7 +65,7 @@ const Violation = sequelize.define('parking_violations', {
     id               : { type: Sequelize.DataTypes.UUID, defaultValue: Sequelize.DataTypes.UUIDV1, primaryKey: true },
     userId           : { type: Sequelize.DataTypes.UUID },
     licenseNumber    : { type: Sequelize.STRING },
-    description      : { type: Sequelize.STRING },
+    description      : { type: Sequelize.TEXT },
     violationTime    : { type: Sequelize.DATE },
     long             : { type: Sequelize.FLOAT },
     lat              : { type: Sequelize.FLOAT },
@@ -78,7 +78,7 @@ const Note = sequelize.define('parking_notes', {
     id               : { type: Sequelize.DataTypes.UUID, defaultValue: Sequelize.DataTypes.UUIDV1, primaryKey: true },
     userId           : { type: Sequelize.DataTypes.UUID },
     licenseNumber    : { type: Sequelize.STRING },
-    description      : { type: Sequelize.STRING },
+    description      : { type: Sequelize.TEXT },
     recordTime       : { type: Sequelize.DATE },
     long             : { type: Sequelize.FLOAT },
     lat              : { type: Sequelize.FLOAT },
@@ -89,6 +89,7 @@ module.exports = {
     init: async () => {
         await promiseSequelizeInit;
     },
+    sequelizeAdapter: sequelize,
     User        : new Table(User, promiseSequelizeInit),
     AccessToken : new Table(AccessToken, promiseSequelizeInit),
     Note        : new Table(Note, promiseSequelizeInit),
