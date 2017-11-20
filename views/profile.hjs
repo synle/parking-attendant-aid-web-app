@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+    <title>Parking Attendant Aid</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+
+    <script>
+        var current_user = {
+            id : "{{ user.id }}",
+            email : "{{ user.email }}",
+            firstName : "{{ user.firstName }}",
+            lastName : "{{ user.lastName }}",
+        }
+    </script>
+
+    <div class="text-center">
+        <h1><span class="fa fa-anchor"></span> Parking Attendant Aid</h1>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+        <hr />
+    </div>
+
+    <div class="row">
+
+    <!-- LOCAL INFORMATION -->
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><span class="fa fa-user"></span> User Profile</div>
+            <div class="panel-body">
+                <strong>user_id:</strong><br />
+                {{ user.id }}<br>
+                <strong>email:</strong><br />
+                {{ user.email }}<br>
+                <strong>first_name:</strong><br />
+                {{ user.firstName }}<br />
+                <strong>last_name:</strong><br />
+                {{ user.lastName }}<br />
+            </div>
+          </div>
+    </div>
+    </div>
+</body>
+</html>
