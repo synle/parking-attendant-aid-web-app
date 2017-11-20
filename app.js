@@ -31,9 +31,6 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(express.static(path.join(__dirname, 'public')));
 
-// TODO: remove me when done...
-app.use(express.static(path.join(__dirname, 'uploads')));
-
 
 //passport
 require('./passport.config.js')(passport);
