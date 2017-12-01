@@ -46,16 +46,16 @@ const promiseSequelizeInit = sequelize.sync().then(function (argument) {
 
 const User = sequelize.define('parking_users', {
     id               : { type: Sequelize.DataTypes.UUID, defaultValue: Sequelize.DataTypes.UUIDV1, primaryKey: true },
-    email            : { type: Sequelize.STRING },
-    password         : { type: Sequelize.STRING },
-    firstName        : { type: Sequelize.STRING },
-    lastName         : { type: Sequelize.STRING },
+    email            : { type: Sequelize.STRING, allowNull: false, unique: true},
+    password         : { type: Sequelize.STRING, allowNull: false, },
+    firstName        : { type: Sequelize.STRING, allowNull: false, },
+    lastName         : { type: Sequelize.STRING, allowNull: false, },
 });
 
 
 const AccessToken = sequelize.define('parking_accesses', {
     id               : { type: Sequelize.DataTypes.UUID, defaultValue: Sequelize.DataTypes.UUIDV1, primaryKey: true },
-    userId           : { type: Sequelize.DataTypes.UUID },
+    userId           : { type: Sequelize.DataTypes.UUID, allowNull: false, },
     token            : { type: Sequelize.TEXT },
     expired          : { type: Sequelize.BOOLEAN, defaultValue: false },
 });
@@ -63,7 +63,7 @@ const AccessToken = sequelize.define('parking_accesses', {
 
 const Violation = sequelize.define('parking_violations', {
     id               : { type: Sequelize.DataTypes.UUID, defaultValue: Sequelize.DataTypes.UUIDV1, primaryKey: true },
-    userId           : { type: Sequelize.DataTypes.UUID },
+    userId           : { type: Sequelize.DataTypes.UUID, allowNull: false },
     licenseNumber    : { type: Sequelize.STRING },
     description      : { type: Sequelize.TEXT },
     violationTime    : { type: Sequelize.DATE },
@@ -76,7 +76,7 @@ const Violation = sequelize.define('parking_violations', {
 
 const Note = sequelize.define('parking_notes', {
     id               : { type: Sequelize.DataTypes.UUID, defaultValue: Sequelize.DataTypes.UUIDV1, primaryKey: true },
-    userId           : { type: Sequelize.DataTypes.UUID },
+    userId           : { type: Sequelize.DataTypes.UUID, allowNull: false },
     licenseNumber    : { type: Sequelize.STRING },
     description      : { type: Sequelize.TEXT },
     recordTime       : { type: Sequelize.DATE },
