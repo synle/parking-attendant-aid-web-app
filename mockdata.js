@@ -1,6 +1,12 @@
 const dataMockUtil = require('data-mock-util');
 const daoUtil = require('./library/daoUtil');
 
+
+let NUM_MOCK_USER = 5;
+let NUM_MOCK_VIOLATIONS = 5;
+let NUM_MOCK_NOTES = 5;
+
+
 async function _doWork(){
     await daoUtil.init();
     console.log('Start Mocking');
@@ -12,9 +18,6 @@ async function _doWork(){
         }],
         Mock_Violations = [],
         Mock_Notes = [];
-
-    let NUM_MOCK_USER = 5;
-    let NUM_MOCK_VIOLATIONS = 5;
 
 
     //
@@ -37,7 +40,9 @@ async function _doWork(){
     // insert the user itself...
     try{
         await daoUtil.User.bulkCreate(Mock_Users);
-    } catch(e){};
+    } catch(e){
+        console.log('User create failed');
+    };
 
     Mock_Users = await daoUtil.User.findAll();
 
@@ -52,20 +57,69 @@ async function _doWork(){
             licenseNumber: dataMockUtil.getLicensePlate(),
             description: dataMockUtil.getItem(violation_list),
             violationTime: dataMockUtil.getDateObject(),
-            long: '',
-            lat: '',
+            long: _getLong(),
+            lat: _getLat(),
             fineAmount: dataMockUtil.getPositiveInteger(9) * 100,
             paid: dataMockUtil.getBoolean(),
         });
     }
 
-    console.log(Mock_Violations);
+    // console.log(Mock_Violations);
 
+
+
+
+
+    while(NUM_MOCK_NOTES > 0){
+        NUM_MOCK_NOTES--;
+
+        Mock_Notes.push({
+            userId: dataMockUtil.getItem(Mock_Users).id,
+            licenseNumber: dataMockUtil.getLicensePlate(),
+            description: dataMockUtil.getItem(note_list),
+            recordTime: dataMockUtil.getDateObject(),
+            long: _getLong(),
+            lat: _getLat(),
+        });
+    }
+
+    // console.log(Mock_Notes);
 
 
 
 
     console.log('Insert to DB');
+
+
+
+    var cur_model = daoUtil.Violation;
+    var cur_model_name = 'Violation';
+    var cur_list = Mock_Violations;
+    for (var i = 0; i < cur_list.length; i++){
+        var cur_item = cur_list[i];
+
+        try{
+            await cur_model.create(cur_item);
+        } catch(e){
+            console.log(cur_model_name + ' create failed', e);
+        };
+    }
+
+
+
+
+    var cur_model = daoUtil.Note;
+    var cur_model_name = 'Notes';
+    var cur_list = Mock_Notes;
+    for (var i = 0; i < cur_list.length; i++){
+        var cur_item = cur_list[i];
+
+        try{
+            await cur_model.create(cur_item);
+        } catch(e){
+            console.log(cur_model_name + ' create failed', e);
+        };
+    }
 }
 
 
@@ -103,5 +157,28 @@ const note_list = [
     'Reckless driving',
     'Driving without a license, insurance, or registration',
 ];
+
+
+
+function _getLat(){
+    var res = '37.78';
+
+    for (let i = 0; i < 4; i++){
+        res += dataMockUtil.getDigit()
+    }
+
+
+    return parseFloat(res);
+}
+
+function _getLong(){
+    var res = '-122.40';
+
+    for (let i = 0; i < 4; i++){
+        res += dataMockUtil.getDigit()
+    }
+
+    return parseFloat(res);
+}
 
 _doWork();
