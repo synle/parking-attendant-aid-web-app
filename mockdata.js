@@ -1,4 +1,5 @@
 const dataMockUtil = require('data-mock-util');
+
 const daoUtil = require('./library/daoUtil');
 
 
@@ -56,7 +57,7 @@ async function _doWork(){
             userId: dataMockUtil.getItem(Mock_Users).id,
             licenseNumber: dataMockUtil.getLicensePlate(),
             description: dataMockUtil.getItem(violation_list),
-            violationTime: dataMockUtil.getDateObject(),
+            violationTime: dataMockUtil.getDateObject(21, null, true),
             long: _getLong(),
             lat: _getLat(),
             fineAmount: dataMockUtil.getPositiveInteger(9) * 100,
@@ -65,6 +66,7 @@ async function _doWork(){
     }
 
     console.log('Mock_Violations', Mock_Violations.length);
+    console.log(Mock_Violations[0])
 
 
 
@@ -77,13 +79,14 @@ async function _doWork(){
             userId: dataMockUtil.getItem(Mock_Users).id,
             licenseNumber: dataMockUtil.getLicensePlate(),
             description: dataMockUtil.getItem(note_list),
-            recordTime: dataMockUtil.getDateObject(),
+            recordTime: dataMockUtil.getDateObject(21, null, true),
             long: _getLong(),
             lat: _getLat(),
         });
     }
 
     console.log('Mock_Notes', Mock_Notes.length);
+    console.log(Mock_Notes[0])
 
 
 
