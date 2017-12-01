@@ -131,7 +131,7 @@ var resourceUtil = {
   },
 
 
-  getAllNotestionsByUserId: function(userId){
+  getAllNotesByUserId: function(userId){
     return daoUtil.Note.findAll({
       where: {userId},
       order: '"updatedAt" DESC'

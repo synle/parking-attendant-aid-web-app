@@ -62,13 +62,14 @@ module.exports = function(app, passport){
     // =====================================
 
     // main profile page
-    app.get('/profile', isLoggedIn, function(req, res) {
+    app.get('/profile', isLoggedIn, async function(req, res) {
         const user = req.user;
         const userId = user.id;
         const userEmail = user.email;
+
         // console.log(user);
         res.render('profile', {
-            user : req.user // get the user out of session and pass to template
+            user : req.user, // get the user out of session and pass to template
         });
     });
 
@@ -146,7 +147,7 @@ module.exports = function(app, passport){
 
         const {target_user_id} = req.params;
 
-        resourceUtil.getAllNotestionsByUserId(target_user_id)
+        resourceUtil.getAllNotesByUserId(target_user_id)
             .then(
                 function success(value){
                     res.json({

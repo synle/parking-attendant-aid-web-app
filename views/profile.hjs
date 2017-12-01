@@ -14,6 +14,7 @@
 </head>
 <body>
 <div class="container-fluid">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.js"></script>
 
     <script>
         var current_user = {
@@ -22,6 +23,53 @@
             firstName : "{{ user.firstName }}",
             lastName : "{{ user.lastName }}",
         }
+
+
+        $.ajax({
+            url: '/api/v1/note/userid/' + current_user.id,
+            success: function(data){
+                const items = data.value;
+                if(items.length > 0){
+                    $('#notes').empty();
+
+                    items.forEach(item => {
+                        var time = item.recordTime;
+
+                        $('#notes').append(`
+                            <tr>
+                                <td>${item.licenseNumber}</td>
+                                <td>${item.description}</td>
+                                <td>${item.recordTime}</td>
+                            </tr>
+                        `)
+                    })
+                }
+            }
+        })
+
+
+
+        $.ajax({
+            url: '/api/v1/violation/userid/' + current_user.id,
+            success: function(data){
+                const items = data.value;
+                if(items.length > 0){
+                    $('#violations').empty();
+
+                    items.forEach(item => {
+                        $('#violations').append(`
+                            <tr>
+                                <td>${item.licenseNumber}</td>
+                                <td>${item.description}</td>
+                                <td>${item.violationTime}</td>
+                                <td>${item.fineAmount}</td>
+                                <td>${item.paid ? 'PAID' : ''}</td>
+                            </tr>
+                        `)
+                    })
+                }
+            }
+        })
     </script>
 
     <div class="text-center">
@@ -33,7 +81,7 @@
     <div class="row">
 
     <!-- LOCAL INFORMATION -->
-    <div class="col-sm-12">
+    <div class="col-sm-4">
         <div class="panel panel-default">
             <div class="panel-heading"><span class="fa fa-user"></span> User Profile</div>
             <div class="panel-body">
@@ -48,6 +96,50 @@
             </div>
           </div>
     </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+        <div class="panel panel-info">
+            <div class="panel-heading"><span class="fa fa-sticky-note-o"></span> Your Recorded Notes</div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>licenseNumber</th>
+                        <th>description</th>
+                        <th>recordTime</th>
+                      </tr>
+                    </thead>
+                    <tbody id="notes">
+                    </tbody>
+                </table>
+            </div>
+          </div>
+    </div>
+
+        <div class="col-sm-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading"><span class="fa fa-exclamation-circle"></span> Violations</div>
+            <div class="panel-body">
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>licenseNumber</th>
+                        <th>description</th>
+                        <th>violationTime</th>
+                        <th>fineAmount</th>
+                        <th>paid</th>
+                      </tr>
+                    </thead>
+                    <tbody id="violations">
+                    </tbody>
+                </table>
+            </div>
+          </div>
+    </div>
+
     </div>
 </body>
 </html>
