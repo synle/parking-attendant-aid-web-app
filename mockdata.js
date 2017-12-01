@@ -3,8 +3,8 @@ const daoUtil = require('./library/daoUtil');
 
 
 let NUM_MOCK_USER = 5;
-let NUM_MOCK_VIOLATIONS = 5;
-let NUM_MOCK_NOTES = 5;
+let NUM_MOCK_VIOLATIONS = 200;
+let NUM_MOCK_NOTES = 200;
 
 
 async function _doWork(){
@@ -64,7 +64,7 @@ async function _doWork(){
         });
     }
 
-    // console.log(Mock_Violations);
+    console.log('Mock_Violations', Mock_Violations.length);
 
 
 
@@ -83,7 +83,7 @@ async function _doWork(){
         });
     }
 
-    // console.log(Mock_Notes);
+    console.log('Mock_Notes', Mock_Notes.length);
 
 
 
