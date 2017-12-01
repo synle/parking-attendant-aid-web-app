@@ -70,6 +70,7 @@ module.exports = function(app, passport){
         // console.log(user);
         res.render('profile', {
             user : req.user, // get the user out of session and pass to template
+            power_bi_dashboard: process.env.POWER_BI_DASHBOARD,
         });
     });
 

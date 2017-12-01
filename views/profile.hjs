@@ -81,7 +81,7 @@
     <div class="row">
 
     <!-- LOCAL INFORMATION -->
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <div class="panel panel-default">
             <div class="panel-heading"><span class="fa fa-user"></span> User Profile</div>
             <div class="panel-body">
@@ -96,6 +96,19 @@
             </div>
           </div>
     </div>
+
+
+
+    <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading"><span class="fa fa-user"></span> Dashboard</div>
+            <div class="panel-body">
+                <iframe style="width:100%;min-height: 800px" src="{{power_bi_dashboard}}" frameborder="0" allowFullScreen="true"></iframe>
+            </div>
+          </div>
+    </div>
+
+
     </div>
 
 
