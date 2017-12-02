@@ -170,7 +170,7 @@ var resourceUtil = {
   getAllViolations: function(){
     return daoUtil.Violation.findAll({
       where: {},
-      order: '"updatedAt" DESC'
+      order: '"violationTime" DESC'
     });
   },
 
@@ -178,7 +178,7 @@ var resourceUtil = {
   getAllViolationsByLicenseNumber: function(licenseNumber){
     return daoUtil.Violation.findAll({
       where: {licenseNumber},
-      order: '"updatedAt" DESC'
+      order: '"violationTime" DESC'
     });
   },
 
@@ -186,7 +186,7 @@ var resourceUtil = {
   getAllViolationsByUserId: function(userId){
     return daoUtil.Violation.findAll({
       where: {userId},
-      order: '"updatedAt" DESC'
+      order: '"violationTime" DESC'
     });
   },
 

@@ -1,5 +1,6 @@
-// internal
-var resourceUtil = require('../library/resourceUtil.js');
+const builder = require('botbuilder');
+const resourceUtil = require('../library/resourceUtil');
+
 
 // route definitions...
 module.exports = function(app, passport){
@@ -389,7 +390,90 @@ module.exports = function(app, passport){
         )
     });
 
+
+    // =====================================
+    // AUTHENTICATED PAGES =================
+    // =====================================
+    const connector = new builder.ChatConnector({
+        appId: process.env.MICROSOFT_APP_ID,
+        appPassword: process.env.MICROSOFT_APP_PASSWORD
+    });
+
+
+    // Listen for messages from users
+    app.post('/api/messages', connector.listen());
+
+
+    // This is a dinner reservation bot that uses multiple dialogs to prompt users for input.
+    var bot = new builder.UniversalBot(connector, [
+        // Step 1
+        async function (session) {
+            session.send('Welcome to Parking Aid Automatic System. I am a bot, can help you with basic look up your violations.')
+            builder.Prompts.text(session, 'To get started, whats your license plate #?');
+        },
+        async function (session, results) {
+            if(session.userData){
+                session.userData = {};
+            }
+
+            session.userData.licensePlate = results.response;
+            console.log(results.response);
+
+
+            session.send(`Looking up information for License Plate #: ${session.userData.licensePlate}`);
+
+            session.replaceDialog('showViolations');
+        },
+    ])
+
+
+    bot.dialog("showViolations", [
+        async function (session) {
+            const licensePlate = session.userData.licensePlate;
+
+            session.userData.violations = [];
+            try{
+                session.userData.violations = await resourceUtil.getAllViolationsByLicenseNumber(licensePlate);
+            } catch(e){};
+
+            session.send('Violations count: ' + session.userData.violations.length);
+
+            builder.Prompts.choice(session, "Select one of the following violations?", session.userData.violations
+                .filter(cur_event => !cur_event.paid)
+                .map((cur_event, cur_idx) => {
+                    return [
+                        new Date(cur_event.violationTime).toDateString() + ' - ' + cur_event.description.substr(0, 25),
+                    ].join('\n');
+                })
+            );
+        },
+        async function (session, results) {
+            const event = session.userData.violations[results.response.index];
+
+            session.send(`
+violationTime: ${event.violationTime}
+licenseNumber: ${event.licenseNumber}
+description: ${event.description}
+violationTime: ${event.violationTime}
+fineAmount: ${event.fineAmount}
+paid: ${event.paid ? 'PAID': 'NOT PAID'}
+            `);
+
+
+
+            session.send('Map for this violation can be found at: https://maps.google.com/?ll=' + event.lat + ',' + event.long);
+
+
+            session.send('Visit this PayPal link to pay...');
+            session.send('http://paypal.com/' + event.id);
+
+
+            session.replaceDialog('showViolations');
+        },
+    ])
+
 }
+
 
 
 // route middleware to make sure a user is logged in

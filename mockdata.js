@@ -49,13 +49,23 @@ async function _doWork(){
 
 
 
+    var list_license_numbers = [
+        '1234567',
+    ];
+
+    for (var i = 0; i < 10; i++){
+        list_license_numbers.push(dataMockUtil.getLicensePlate())
+    }
+
+
+
     // mock violations and notes
     while(NUM_MOCK_VIOLATIONS > 0){
         NUM_MOCK_VIOLATIONS--;
 
         Mock_Violations.push({
             userId: dataMockUtil.getItem(Mock_Users).id,
-            licenseNumber: dataMockUtil.getLicensePlate(),
+            licenseNumber: dataMockUtil.getItem(list_license_numbers),
             description: dataMockUtil.getItem(violation_list),
             violationTime: dataMockUtil.getDateObject(21, null, true),
             long: _getLong(),
@@ -77,7 +87,7 @@ async function _doWork(){
 
         Mock_Notes.push({
             userId: dataMockUtil.getItem(Mock_Users).id,
-            licenseNumber: dataMockUtil.getLicensePlate(),
+            licenseNumber: dataMockUtil.getItem(list_license_numbers),
             description: dataMockUtil.getItem(note_list),
             recordTime: dataMockUtil.getDateObject(21, null, true),
             long: _getLong(),
@@ -164,9 +174,9 @@ const note_list = [
 
 
 function _getLat(){
-    var res = '37.78';
+    var res = '37.7';
 
-    for (let i = 0; i < 4; i++){
+    for (let i = 0; i < 5; i++){
         res += dataMockUtil.getDigit()
     }
 
@@ -175,9 +185,9 @@ function _getLat(){
 }
 
 function _getLong(){
-    var res = '-122.40';
+    var res = '-122.4';
 
-    for (let i = 0; i < 4; i++){
+    for (let i = 0; i < 5; i++){
         res += dataMockUtil.getDigit()
     }
 
