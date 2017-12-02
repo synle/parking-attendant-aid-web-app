@@ -19,6 +19,11 @@
         <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Sign Up for new account</a>
     </div>
 
+
+    <div>
+        <a href="/status">Paying for citation</a>
+    </div>
+
 </div>
 </body>
 </html>

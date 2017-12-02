@@ -14,6 +14,18 @@ module.exports = function(app, passport){
         res.render('login', { message: req.flash('loginMessage') });
     });
 
+
+    app.get('/status', function(req, res, next) {
+        res.render(
+            'citation_check_chatbot',
+            {
+                BOT_SECRET: process.env.BOT_SECRET,
+            }
+        );
+    });
+
+
+
     // post - process login ajax
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/profile', // redirect to the secure profile section
