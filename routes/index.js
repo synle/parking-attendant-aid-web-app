@@ -461,14 +461,12 @@ module.exports = function(app, passport){
         async function (session, results) {
             const event = session.userData.violations[results.response.index];
 
-            session.send(`
-violationTime: ${event.violationTime}
-licenseNumber: ${event.licenseNumber}
-description: ${event.description}
-violationTime: ${event.violationTime}
-fineAmount: ${event.fineAmount}
-paid: ${event.paid ? 'PAID': 'NOT PAID'}
-            `);
+            session.send(`violationTime: ${event.violationTime}`);
+            session.send(`licenseNumber: ${event.licenseNumber}`);
+            session.send(`description: ${event.description}`);
+            session.send(`violationTime: ${event.violationTime}`);
+            session.send(`fineAmount: ${event.fineAmount}`);
+            session.send(`paid: ${event.paid ? 'PAID': 'NOT PAID'}`);
 
 
 
