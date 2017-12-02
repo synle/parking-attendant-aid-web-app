@@ -475,6 +475,9 @@ paid: ${event.paid ? 'PAID': 'NOT PAID'}
             session.send('Map for this violation can be found at: https://maps.google.com/?ll=' + event.lat + ',' + event.long);
 
 
+            session.send('http://staticmap.openstreetmap.de/staticmap.php?center=' + event.lat + ',' + event.long + '&zoom=14&size=865x512&maptype=mapnik');
+
+
             session.send('Visit this PayPal link to pay...');
             session.send('http://paypal.com/' + event.id);
 
