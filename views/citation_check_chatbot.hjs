@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
+    <title>Parking Attendant Aid</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <style>
@@ -14,7 +14,8 @@
 <div class="container">
 
     <div>
-        <h1>Citation Chatbot</h1>
+        <h1>Citation Payment Chatbot</h1>
+        <h2>Please enter your question in the chat box...</h2>
         <iframe style="width:100%; height:800px" src='https://webchat.botframework.com/embed/parkingaid-297?s={{BOT_SECRET}}'></iframe>
     </div>
 
