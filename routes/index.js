@@ -1,4 +1,5 @@
 const builder = require('botbuilder');
+const _ = require('lodash');
 const resourceUtil = require('../library/resourceUtil');
 
 
@@ -448,13 +449,11 @@ module.exports = function(app, passport){
                 session.userData.violations = await resourceUtil.getAllViolationsByLicenseNumber(licensePlate);
             } catch(e){};
 
-            session.send('Violations count: ' + session.userData.violations.length);
-
             builder.Prompts.choice(session, "Select one of the following violations?", session.userData.violations
                 .filter(cur_event => !cur_event.paid)
                 .map((cur_event, cur_idx) => {
                     return [
-                        new Date(cur_event.violationTime).toDateString() + ' - ' + cur_event.description.substr(0, 25),
+                        new Date(cur_event.violationTime).toDateString() + ' - ' + _.truncate(cur_event.description, 25, '...'),
                     ].join('\n');
                 })
             );
