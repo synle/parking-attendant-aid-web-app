@@ -33,13 +33,15 @@
                     $('#notes').empty();
 
                     items.forEach(item => {
-                        $('#notes').append(`
+                        $(`
                             <tr>
                                 <td>${item.licenseNumber}</td>
                                 <td>${item.description}</td>
-                                <td>${item.recordTime.toLocaleString()}</td>
+                                <td>${new Date(item.recordTime).toLocaleString()}</td>
                             </tr>
                         `)
+                            .click(() => printInfo(item))
+                            .appendTo('#notes')
                     })
                 }
             }
@@ -55,19 +57,33 @@
                     $('#violations').empty();
 
                     items.forEach(item => {
-                        $('#violations').append(`
+                        $(`
                             <tr>
                                 <td>${item.licenseNumber}</td>
                                 <td>${item.description}</td>
-                                <td>${item.violationTime.toLocaleString()}</td>
+                                <td>${new Date(item.violationTime).toLocaleString()}</td>
                                 <td>$${item.fineAmount}</td>
                                 <td>${item.paid ? 'PAID' : ''}</td>
                             </tr>
                         `)
+                            .click(() => printInfo(item))
+                            .appendTo('#violations')
+
                     })
                 }
             }
         })
+
+        function printInfo(item){
+            var keys = Object.keys(item);
+            var resp = 'Information: \n\n';
+            keys.forEach(key => {
+                var val = item[key];
+                resp += key + ': ' + val +  '\n'
+            })
+
+            alert(resp);
+        }
     </script>
 
     <div class="text-center">
