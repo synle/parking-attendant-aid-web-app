@@ -5,7 +5,7 @@ const daoUtil = require('./library/daoUtil');
 
 let NUM_MOCK_USER = 5;
 let NUM_MOCK_VIOLATIONS = 200;
-let NUM_MOCK_NOTES = 200;
+let NUM_MOCK_NOTES = 30;
 
 
 async function _doWork(){
@@ -156,19 +156,10 @@ const violation_list = [
 ];
 
 const note_list = [
-    'Speeding',
-    'Running a red light',
-    'Not signaling',
-    'Crossing the median',
-    'Driving in car pool lane',
-    'Not stopping for school bus',
-    'Not stopping for pedestrians',
-    'Not using seat belt',
-    'Driving on shoulder',
-    'Passing in a no passing zone',
-    'Drunk driving',
-    'Reckless driving',
-    'Driving without a license, insurance, or registration',
+    'Has no license plate',
+    'Expired parking permit',
+    'Partially parked on the red lane',
+    'Blocked the driveway',
 ];
 
 
