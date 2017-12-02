@@ -471,13 +471,10 @@ module.exports = function(app, passport){
 
 
             session.send('Map for this violation can be found at: https://maps.google.com/?ll=' + event.lat + ',' + event.long);
-
-
-            session.send('http://staticmap.openstreetmap.de/staticmap.php?center=' + event.lat + ',' + event.long + '&zoom=14&size=865x512&maptype=mapnik');
-
-
+            // session.send('http://staticmap.openstreetmap.de/staticmap.php?center=' + event.lat + ',' + event.long + '&zoom=14&size=865x512&maptype=mapnik');
             session.send('Visit this PayPal link to pay...');
-            session.send('http://paypal.com/' + event.id);
+            // session.send('http://paypal.com/' + event.id);
+            session.send('https://www.paypal.com/webapps/hermes?token=80A28161F58136108&useraction=commit&mfid=1512177462343_4e0e0b7b579f')
 
 
             session.replaceDialog('showViolations');
