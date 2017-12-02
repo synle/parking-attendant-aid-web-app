@@ -33,13 +33,11 @@
                     $('#notes').empty();
 
                     items.forEach(item => {
-                        var time = item.recordTime;
-
                         $('#notes').append(`
                             <tr>
                                 <td>${item.licenseNumber}</td>
                                 <td>${item.description}</td>
-                                <td>${item.recordTime}</td>
+                                <td>${item.recordTime.toLocaleString()}</td>
                             </tr>
                         `)
                     })
@@ -61,7 +59,7 @@
                             <tr>
                                 <td>${item.licenseNumber}</td>
                                 <td>${item.description}</td>
-                                <td>${item.violationTime}</td>
+                                <td>${item.violationTime.toLocaleString()}</td>
                                 <td>$${item.fineAmount}</td>
                                 <td>${item.paid ? 'PAID' : ''}</td>
                             </tr>
