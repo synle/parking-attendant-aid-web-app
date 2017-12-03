@@ -47,10 +47,19 @@ There are 2 repos for this project. One of them is the iOS Client to interact wi
 ## How to
 ### Environment Vars required for the web app...
 ```
+# for session secret
+export SESSION_SECRET='YOUR_SESSION_SECRET'
+
+# for database
 export MAIN_DB_HOST='YOUR_MAIN_DB_HOST'
 export MAIN_DB_NAME='YOUR_MAIN_DB_NAME'
 export MAIN_DB_USER='YOUR_MAIN_DB_USER'
 export MAIN_DB_PASSWORD='YOUR_MAIN_DB_PASSWORD'
+
+
+# for redis caching...
+export CACHE_HOST='YOUR_CACHE_HOST'
+export CACHE_PASSWORD='YOUR_CACHE_PASSWORD'
 ```
 
 
