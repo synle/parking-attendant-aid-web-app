@@ -28,15 +28,15 @@ There are 2 repos for this project. One of them is the iOS Client to interact wi
 
 ## Screenshots
 ### Dashboard for agency to look into insights
-![alt text](./screenshot/1.png "1")
+![alt text](./screenshots/1.png "1")
 
 ### Previously Recorded Violations and Notes
-![alt text](./screenshot/2.png "2")
-![alt text](./screenshot/3.png "3")
+![alt text](./screenshots/2.png "2")
+![alt text](./screenshots/3.png "3")
 
 ### Self-served citation payment chatbot
-![alt text](./screenshot/4.png "4")
-![alt text](./screenshot/5.png "5")
+![alt text](./screenshots/4.png "4")
+![alt text](./screenshots/5.png "5")
 
 
 ## How to
